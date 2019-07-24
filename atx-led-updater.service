@@ -1,0 +1,16 @@
+[Unit]
+Description=ATX-LED Updater
+After=multi-user.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+Restart=no
+
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/atxled/releases
+ExecStart=/home/pi/atxled/releases/update.sh
+
+[Install]
+WantedBy=multi-user.target
