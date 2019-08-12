@@ -1,6 +1,7 @@
 [Unit]
 Description=ATX-LED Updater
 After=multi-user.target
+Wants=network-online.target
 
 [Service]
 Type=oneshot
