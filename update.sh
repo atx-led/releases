@@ -9,7 +9,7 @@ BRANCH='origin/master'
 echo 'Grabbing updates...'
 # Ignore all local changes, oh what fun!
 git reset --hard
-git fetch
+git fetch || echo 'Could not fetch!'
 git checkout $BRANCH
 rm -rf $INSTALL_DIR
 mkdir $INSTALL_DIR
