@@ -25,4 +25,4 @@ cd releases
 rm -rf $INSTALL_DIR
 mkdir $INSTALL_DIR
 unzip bundle.zip -d $INSTALL_DIR
-python3 $INSTALL_DIR/ops/install.py
+sudo python3 $INSTALL_DIR/ops/install.py
