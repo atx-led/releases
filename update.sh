@@ -4,6 +4,8 @@ set -e
 BASE=`dirname $0`/..
 cd $BASE
 
+sudo python3 $BASE/releases/expand.py
+
 INSTALL_DIR=/home/pi/atxled/hue
 
 BRANCH='master'
