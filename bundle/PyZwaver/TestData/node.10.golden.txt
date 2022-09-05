@@ -1,0 +1,123 @@
+
+incoming:  SOF len:11 REQU API_ZW_APPLICATION_UPDATE:49 84 node:10 0b 04 20 01 30 31 80 84 70 85 72 86 chk:19
+hex:  ['01', '11', '00', '49', '84', '10', '0b', '04', '20', '01', '30', '31', '80', '84', '70', '85', '72', '86', '19']
+SOF len:09 REQU API_ZW_SEND_DATA:13 node:10 02 SensorMultilevel_SupportedGet:31 X:01 xmit:25 cb:43 chk:a1
+SOF len:09 REQU API_ZW_SEND_DATA:13 node:10 02 Version_Get:86 X:11 xmit:25 cb:44 chk:01
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 ManufacturerSpecific_DeviceSpecificGet:72 X:06 00 xmit:25 cb:45 chk:e1
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 ManufacturerSpecific_DeviceSpecificGet:72 X:06 01 xmit:25 cb:46 chk:e3
+SOF len:09 REQU API_ZW_SEND_DATA:13 node:10 02 Association_GroupingsGet:85 X:05 xmit:25 cb:47 chk:15
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 Version_CommandClassGet:86 X:13 30 xmit:25 cb:48 chk:3d
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 Version_CommandClassGet:86 X:13 31 xmit:25 cb:49 chk:3d
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 Version_CommandClassGet:86 X:13 80 xmit:25 cb:4a chk:8f
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 Version_CommandClassGet:86 X:13 84 xmit:25 cb:4b chk:8a
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 Version_CommandClassGet:86 X:13 70 xmit:25 cb:4c chk:79
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 Version_CommandClassGet:86 X:13 85 xmit:25 cb:4d chk:8d
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 Version_CommandClassGet:86 X:13 72 xmit:25 cb:4e chk:79
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 Version_CommandClassGet:86 X:13 86 xmit:25 cb:4f chk:8c
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 Version_CommandClassGet:86 X:13 20 xmit:25 cb:50 chk:35
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 ManufacturerSpecific_DeviceSpecificGet:72 X:06 00 xmit:25 cb:51 chk:f5
+SOF len:09 REQU API_ZW_SEND_DATA:13 node:10 02 ManufacturerSpecific_Get:72 X:04 xmit:25 cb:52 chk:f6
+
+incoming:  SOF len:09 REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:03 SensorMultilevel_SupportedReport:31 X:02 15 chk:c7
+hex:  ['01', '09', '00', '04', '00', '10', '03', '31', '02', '15', 'c7']
+
+incoming:  SOF len:09 REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:03 Association_GroupingsReport:85 X:06 01 chk:63
+hex:  ['01', '09', '00', '04', '00', '10', '03', '85', '06', '01', '63']
+
+incoming:  SOF len:0d REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:07 Version_Report:86 X:12 06 03 1c 01 12 chk:7f
+hex:  ['01', '0d', '00', '04', '00', '10', '07', '86', '12', '06', '03', '1c', '01', '12', '7f']
+
+incoming:  SOF len:0a REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:04 Version_CommandClassReport:86 X:14 30 01 chk:46
+hex:  ['01', '0a', '00', '04', '00', '10', '04', '86', '14', '30', '01', '46']
+
+incoming:  SOF len:0a REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:04 Version_CommandClassReport:86 X:14 31 05 chk:43
+hex:  ['01', '0a', '00', '04', '00', '10', '04', '86', '14', '31', '05', '43']
+
+incoming:  SOF len:0a REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:04 Version_CommandClassReport:86 X:14 72 01 chk:04
+hex:  ['01', '0a', '00', '04', '00', '10', '04', '86', '14', '72', '01', '04']
+
+incoming:  SOF len:0a REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:04 Version_CommandClassReport:86 X:14 84 02 chk:f1
+hex:  ['01', '0a', '00', '04', '00', '10', '04', '86', '14', '84', '02', 'f1']
+
+incoming:  SOF len:0a REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:04 Version_CommandClassReport:86 X:14 85 01 chk:f3
+hex:  ['01', '0a', '00', '04', '00', '10', '04', '86', '14', '85', '01', 'f3']
+
+incoming:  SOF len:0a REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:04 Version_CommandClassReport:86 X:14 86 01 chk:f0
+hex:  ['01', '0a', '00', '04', '00', '10', '04', '86', '14', '86', '01', 'f0']
+
+incoming:  SOF len:0a REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:04 Version_CommandClassReport:86 X:14 70 01 chk:06
+hex:  ['01', '0a', '00', '04', '00', '10', '04', '86', '14', '70', '01', '06']
+
+incoming:  SOF len:0a REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:04 Version_CommandClassReport:86 X:14 80 01 chk:f6
+hex:  ['01', '0a', '00', '04', '00', '10', '04', '86', '14', '80', '01', 'f6']
+
+incoming:  SOF len:0e REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:08 ManufacturerSpecific_Report:72 X:05 00 86 00 02 00 05 chk:1b
+hex:  ['01', '0e', '00', '04', '00', '10', '08', '72', '05', '00', '86', '00', '02', '00', '05', '1b']
+SOF len:09 REQU API_ZW_SEND_DATA:13 node:10 02 Basic_Get:20 X:02 xmit:25 cb:53 chk:a3
+SOF len:09 REQU API_ZW_SEND_DATA:13 node:10 02 SensorBinary_Get:30 X:02 xmit:25 cb:54 chk:b4
+SOF len:09 REQU API_ZW_SEND_DATA:13 node:10 02 Battery_Get:80 X:02 xmit:25 cb:55 chk:05
+SOF len:09 REQU API_ZW_SEND_DATA:13 node:10 02 SensorMultilevel_Get:31 X:04 xmit:25 cb:56 chk:b1
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 SensorMultilevel_Get:31 X:04 01 xmit:25 cb:57 chk:b3
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 SensorMultilevel_Get:31 X:04 03 xmit:25 cb:58 chk:be
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 SensorMultilevel_Get:31 X:04 05 xmit:25 cb:59 chk:b9
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 Association_Get:85 X:02 01 xmit:25 cb:5a chk:0c
+SOF len:0a REQU API_ZW_SEND_DATA:13 node:10 03 Association_Get:85 X:02 ff xmit:25 cb:5b chk:f3
+
+incoming:  SOF len:09 REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:03 SensorBinary_Report:30 X:03 00 chk:d2
+hex:  ['01', '09', '00', '04', '00', '10', '03', '30', '03', '00', 'd2']
+
+incoming:  SOF len:09 REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:03 Battery_Report:80 X:03 64 chk:06
+hex:  ['01', '09', '00', '04', '00', '10', '03', '80', '03', '64', '06']
+
+incoming:  SOF len:0c REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:06 SensorMultilevel_Report:31 X:05 03 0a 00 01 chk:dd
+hex:  ['01', '0c', '00', '04', '00', '10', '06', '31', '05', '03', '0a', '00', '01', 'dd']
+
+incoming:  SOF len:0c REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:06 SensorMultilevel_Report:31 X:05 05 01 28 00 chk:f9
+hex:  ['01', '0c', '00', '04', '00', '10', '06', '31', '05', '05', '01', '28', '00', 'f9']
+
+incoming:  SOF len:0c REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:06 SensorMultilevel_Report:31 X:05 01 36 01 02 chk:e1
+hex:  ['01', '0c', '00', '04', '00', '10', '06', '31', '05', '01', '36', '01', '02', 'e1']
+
+incoming:  SOF len:09 REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:03 SensorBinary_Report:30 X:03 00 chk:d2
+hex:  ['01', '09', '00', '04', '00', '10', '03', '30', '03', '00', 'd2']
+
+incoming:  SOF len:09 REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:03 Battery_Report:80 X:03 64 chk:06
+hex:  ['01', '09', '00', '04', '00', '10', '03', '80', '03', '64', '06']
+
+incoming:  SOF len:0c REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:06 SensorMultilevel_Report:31 X:05 03 0a 00 01 chk:dd
+hex:  ['01', '0c', '00', '04', '00', '10', '06', '31', '05', '03', '0a', '00', '01', 'dd']
+
+incoming:  SOF len:0c REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:06 SensorMultilevel_Report:31 X:05 05 01 28 00 chk:f9
+hex:  ['01', '0c', '00', '04', '00', '10', '06', '31', '05', '05', '01', '28', '00', 'f9']
+
+incoming:  SOF len:0c REQU API_APPLICATION_COMMAND_HANDLER:04 00 node:10 len:06 SensorMultilevel_Report:31 X:05 01 3a 01 03 chk:ec
+hex:  ['01', '0c', '00', '04', '00', '10', '06', '31', '05', '01', '3a', '01', '03', 'ec']
+============================================================
+Node 16
+============================================================
+########### VALUES
+((48, 3), 'SensorBinary_Report', {'level': 0})
+((49, 2), 'SensorMultilevel_SupportedReport', {'bits': {'size': 1, 'value': 21}})
+((114, 5), 'ManufacturerSpecific_Report', {'manufacturer': 134, 'type': 2, 'product': 5})
+((128, 3), 'Battery_Report', {'level': 100})
+((133, 6), 'Association_GroupingsReport', {'count': 1})
+((134, 18), 'Version_Report', {'library': 6, 'protocol': 796, 'firmware': 274})
+((256, 2), '_ProtocolInfo', {'device_type': (0, 32, 1)})
+########### VERSIONS
+(32, 'Basic', -1)
+(48, 'SensorBinary', 1)
+(49, 'SensorMultilevel', 5)
+(112, 'Configuration', 1)
+(114, 'ManufacturerSpecific', 1)
+(128, 'Battery', 1)
+(132, 'WakeUp', 2)
+(133, 'Association', 1)
+(134, 'Version', 1)
+########### CONFIGURATIONS
+########### ASSOCIATIONS
+########### METERS
+########### SENSORS
+((1, 0), 'Temperature', 'C', 25.9)
+((3, 1), 'Luminance', 'lux', 1.0)
+((5, 0), 'Relative Humidity', '%', 40.0)
+OK

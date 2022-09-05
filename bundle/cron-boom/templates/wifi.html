@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="max-width:600px;text-align:center;margin:auto;">
+  <p>
+    Enter the details for your wifi network. After you click "submit", the wifi
+    hotspot will shut down as we attempt to reach your network. If we cannot
+    reach the internet, this hotspot will start back up after a delay.
+  </p>
+  <form action="/setup" method="post">
+    <table style="margin: auto">
+      <tr>
+        <td>Network: </td>
+
+        <td>
+          <select name='ssid'>
+            <option value=''>Select...</option>
+            {% for network in networks %}
+              <option value='{{ network }}'>{{ network }}</option>
+            {% endfor %}
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="note">...or manual network SSID: </td>
+        <td>
+          <input type='text' id='ssid-manual' name='ssid-manual' />
+        </td>
+      </tr>
+
+      <tr>
+        <td>Password: </td>
+        <td>
+          <input type='password' id='password' name='password' />
+        </td>
+      </tr>
+
+      <tr>
+      </tr>
+
+      <tr>
+        <td colspan='2' align="center">
+          <input type='submit' id='save' name='save' value='Submit' />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+systemctl reload log2ram
