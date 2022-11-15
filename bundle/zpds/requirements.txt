@@ -1,9 +1,0 @@
-alembic
-Flask
-SQLAlchemy
-gunicorn
-pyserial
--e /home/pi/atxled/hue/PyZwaver
-RPi.GPIO
-requests
-jsonschema
