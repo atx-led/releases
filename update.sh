@@ -19,6 +19,26 @@ echo "Grabbing latest code from $URL..."
 curl --fail -o releases.zip --location $URL
 rm -rf new-releases
 unzip -j releases.zip -d new-releases
+
+# Check if the BRANCH is 'prod'
+if [ "$BRANCH" = "master" ]; then
+    if [ -f new-releases/tag ] && [ -f releases/tag ]; then
+        NEW_TAG=`cat new-releases/tag`
+        OLD_TAG=`cat releases/tag`
+        
+        # Extract the numeric component from the front of the tags
+        NEW_TAG_NUM=${NEW_TAG%%-*}
+        OLD_TAG_NUM=${OLD_TAG%%-*}
+        
+        # Compare the numeric components
+        if [ "$NEW_TAG_NUM" -lt "$OLD_TAG_NUM" ]; then
+            rm -rf new-releases
+            echo "New release has an older tag. Exiting."
+            exit 1
+        fi
+    fi
+fi
+
 rm -rf releases
 mv new-releases releases
 
