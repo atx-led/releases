@@ -21,7 +21,7 @@ rm -rf new-releases
 unzip -j releases.zip -d new-releases
 
 # Check if the BRANCH is 'prod'
-if [ "$BRANCH" = "master" ]; then
+if [ "$BRANCH" = "master" ] || [ "$BRANCH" = "test" ] || [ "$BRANCH" = "beta" ]; then
     if [ -f new-releases/tag ] && [ -f releases/tag ]; then
         NEW_TAG=`cat new-releases/tag`
         OLD_TAG=`cat releases/tag`
