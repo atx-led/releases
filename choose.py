@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/home/pi/atxled/venv/zpds/bin/python
 import sys
 import os
 
