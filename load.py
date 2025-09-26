@@ -4,6 +4,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 import urllib.request
 import urllib.parse
 
@@ -18,6 +19,9 @@ os.chdir(BASE)
 RAM_DIR = "ramdisk"
 KEY_FILEPATH = "./key"
 TMP_KEY_FILEPATH = "/tmp/atx-led-key"
+
+KEY_FETCH_TS_PATH = "./user-data/last_key_fetch_at"
+KEY_FETCH_INTERVAL_SECS = 3600  # 1 hour
 
 # ----------------------------
 # Small shell helpers
@@ -136,6 +140,42 @@ def get_channels():
     return 0
 
 # ----------------------------
+# Key fetch throttle helpers
+# ----------------------------
+def _ensure_user_data_dir():
+    try:
+        os.makedirs("./user-data", exist_ok=True)
+    except Exception:
+        pass
+
+def _read_last_key_fetch_at():
+    try:
+        with open(KEY_FETCH_TS_PATH, "r") as f:
+            return int(f.read().strip())
+    except Exception:
+        return 0
+
+def _write_last_key_fetch_at(ts=None):
+    _ensure_user_data_dir()
+    if ts is None:
+        ts = int(time.time())
+    try:
+        with open(KEY_FETCH_TS_PATH, "w") as f:
+            f.write(str(ts))
+    except Exception as e:
+        print("Failed to write last_key_fetch_at: %s" % e, file=sys.stderr)
+
+def _should_skip_remote_fetch(local_available):
+    last = _read_last_key_fetch_at()
+    if last <= 0:
+        return False
+    age = int(time.time()) - last
+    if age < KEY_FETCH_INTERVAL_SECS and local_available:
+        print("Skipping key URL fetch (last fetch %d seconds ago); using local key." % age, file=sys.stderr)
+        return True
+    return False
+
+# ----------------------------
 # Key handling
 # ----------------------------
 def load_local_key_response():
@@ -172,15 +212,27 @@ def fetch_key_response():
 
 def select_key_response():
     local_resp, local_path = load_local_key_response()
+    local_available = local_resp is not None
+
+    if _should_skip_remote_fetch(local_available):
+        return local_resp
+
     try:
+        if not local_available:
+            last = _read_last_key_fetch_at()
+            age = int(time.time()) - last if last > 0 else None
+            if age is not None and age < KEY_FETCH_INTERVAL_SECS:
+                print("No local key but last fetch %d seconds ago; overriding throttle to fetch." % age, file=sys.stderr)
+
         print("Attempting to fetch key from URL…", file=sys.stderr)
         remote_resp = fetch_key_response()
         print("Key fetched from URL; persisting to ./key", file=sys.stderr)
         save_key_response(remote_resp)
+        _write_last_key_fetch_at()
         return remote_resp
     except Exception as e:
         print("Key fetch failed: %s" % e, file=sys.stderr)
-        if local_resp:
+        if local_available:
             print("Falling back to local key (%s)" % local_path, file=sys.stderr)
             return local_resp
         print("No local key available and fetch failed; aborting.", file=sys.stderr)
