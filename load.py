@@ -207,8 +207,13 @@ def fetch_key_response():
     if branch:
         args["branch"] = branch
     url = "https://key.dalihub.com/?%s" % urllib.parse.urlencode(args)
-    with urllib.request.urlopen(url, timeout=10) as f:
-        return f.read().strip()
+    for delay in [1, 5, 10]:
+        try:
+            with urllib.request.urlopen(url, timeout=10) as f:
+                return f.read().strip()
+        except Exception as e:
+            if delay != 10:  # not last attempt
+                time.sleep(delay)
 
 def select_key_response():
     local_resp, local_path = load_local_key_response()
