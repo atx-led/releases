@@ -210,7 +210,13 @@ def fetch_key_response():
     for delay in [1, 5, 10]:
         try:
             with urllib.request.urlopen(url, timeout=10) as f:
-                return f.read().strip()
+                key = f.read().strip()
+                if key and len(key) > 0:
+                    print("got key response from URL", file=sys.stderr)
+                    return key
+                else:
+                    print("empty key response from URL", file=sys.stderr)
+                    raise ValueError("Empty key response from URL")
         except Exception as e:
             if delay != 10:  # not last attempt
                 time.sleep(delay)
