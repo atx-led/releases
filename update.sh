@@ -15,8 +15,23 @@ URL="https://github.com/atx-led/releases/archive/$BRANCH.zip"
 
 echo "Grabbing latest code from $URL..."
 
-# Grab code and replace
-curl --fail -o releases.zip --location $URL
+rm -f releases.zip
+for delay in 1 2 5 10 15; do
+    if curl --fail -o releases.zip --location $URL; then
+        echo "Download succeeded."
+        break
+    else
+        echo "Download failed. Retrying in ${delay}s..."
+        sleep $delay
+    fi
+done
+
+# If releases.zip still doesn't exist after retries, abort
+if [ ! -f releases.zip ]; then
+    echo "Failed to download after multiple attempts."
+    exit 1
+fi
+
 rm -rf new-releases
 unzip -j releases.zip -d new-releases
 
@@ -25,11 +40,11 @@ if [ "$BRANCH" = "master" ] || [ "$BRANCH" = "test" ] || [ "$BRANCH" = "beta" ];
     if [ -f new-releases/tag ] && [ -f releases/tag ]; then
         NEW_TAG=`cat new-releases/tag`
         OLD_TAG=`cat releases/tag`
-        
+
         # Extract the numeric component from the front of the tags
         NEW_TAG_NUM=${NEW_TAG%%-*}
         OLD_TAG_NUM=${OLD_TAG%%-*}
-        
+
         # Compare the numeric components
         if [ "$NEW_TAG_NUM" -lt "$OLD_TAG_NUM" ]; then
             rm -rf new-releases
