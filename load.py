@@ -217,24 +217,32 @@ def fetch_key_response():
 
 def select_key_response():
     local_resp, local_path = load_local_key_response()
-    local_available = local_resp is not None
+    local_available = local_resp is not None and len(local_resp.strip()) > 0
 
+    # If local key exists but is empty, try fetching from URL
+    if local_resp is not None and len(local_resp.strip()) == 0:
+        print("Local key file exists but is empty; attempting to fetch from URL.", file=sys.stderr)
+        local_available = False
+
+    # Throttle check only if a valid local key exists
     if _should_skip_remote_fetch(local_available):
         return local_resp
 
     try:
-        if not local_available:
-            last = _read_last_key_fetch_at()
-            age = int(time.time()) - last if last > 0 else None
-            if age is not None and age < KEY_FETCH_INTERVAL_SECS:
-                print("No local key but last fetch %d seconds ago; overriding throttle to fetch." % age, file=sys.stderr)
-
         print("Attempting to fetch key from URL…", file=sys.stderr)
         remote_resp = fetch_key_response()
-        print("Key fetched from URL; persisting to ./key", file=sys.stderr)
-        save_key_response(remote_resp)
-        _write_last_key_fetch_at()
-        return remote_resp
+        if remote_resp and len(remote_resp.strip()) > 0:
+            print("Key fetched from URL; persisting to ./key", file=sys.stderr)
+            save_key_response(remote_resp)
+            _write_last_key_fetch_at()
+            return remote_resp
+        else:
+            print("Fetched key is empty; skipping write.", file=sys.stderr)
+            if local_available:
+                print("Falling back to local key (%s)" % local_path, file=sys.stderr)
+                return local_resp
+            print("No valid key available; aborting.", file=sys.stderr)
+            sys.exit(1)
     except Exception as e:
         print("Key fetch failed: %s" % e, file=sys.stderr)
         if local_available:
@@ -243,7 +251,12 @@ def select_key_response():
         print("No local key available and fetch failed; aborting.", file=sys.stderr)
         sys.exit(1)
 
+
+
 def process_key_response(key_resp):
+    if not key_resp or len(key_resp.strip()) == 0:
+        raise ValueError("Empty key response provided")
+
     text = ""
     try:
         text = key_resp.decode("utf-8", errors="ignore")
@@ -263,7 +276,12 @@ def process_key_response(key_resp):
         except Exception as e:
             print("Dataplicity install error: %s" % e, file=sys.stderr)
 
-    first_line = key_resp.splitlines()[0].strip()
+    lines = key_resp.splitlines()
+    if not lines:
+        raise ValueError("No lines found in key response")
+    first_line = lines[0].strip()
+    if not first_line:
+        raise ValueError("Key line is empty")
     return first_line
 
 # ----------------------------
