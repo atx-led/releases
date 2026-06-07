@@ -11,6 +11,7 @@ Restart=no
 User=pi
 Group=pi
 WorkingDirectory=/home/pi/atxled/releases
+ExecStartPre=/home/pi/atxled/backup-update.sh
 ExecStart=/home/pi/atxled/releases/update.sh
 
 [Install]
