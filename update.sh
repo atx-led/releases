@@ -10,15 +10,21 @@ INSTALL_DIR=/home/pi/atxled/hue
 
 BRANCH='master'
 [ -f branch ] && BRANCH=`cat branch`
+if [ "$BRANCH" = "cleanlife" ]; then
+    echo "Normalizing cleanlife branch to master."
+    rm -f branch
+    BRANCH='master'
+fi
 
-URL="https://github.com/atx-led/releases/archive/$BRANCH.zip"
+: "${RELEASE_REPO_URL:=https://github.com/CleanLife-IT/Releases---atxlediot}"
+URL="$RELEASE_REPO_URL/archive/$BRANCH.zip"
 
 echo "Grabbing latest code from $URL..."
 
 rm -f releases.zip.tmp
 DOWNLOAD_OK=0
 for delay in 1 2 5 10 15; do
-    if curl --fail -o releases.zip.tmp --location $URL; then
+    if curl --fail -o releases.zip.tmp --location "$URL"; then
         if [ ! -s releases.zip.tmp ]; then
             echo "Download produced an empty releases.zip. Retrying in ${delay}s..."
             sleep $delay

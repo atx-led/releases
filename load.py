@@ -206,7 +206,7 @@ def fetch_key_response():
         args["alerts"] = alerts
     if branch:
         args["branch"] = branch
-    url = "https://key.dalihub.com/?%s" % urllib.parse.urlencode(args)
+    url = "%s?%s" % (util.KEY_URL, urllib.parse.urlencode(args))
     for delay in [1, 5, 10]:
         try:
             with urllib.request.urlopen(url, timeout=10) as f:

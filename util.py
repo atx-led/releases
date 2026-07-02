@@ -1,4 +1,5 @@
 import hashlib
+import os
 import subprocess as sp
 
 # Check out my new mixtape, it's called: Roll Your Own Crypto, Vol. 1
@@ -32,3 +33,9 @@ def run(args, shell=True, check=0, stdout=sp.PIPE, stderr=sp.PIPE, **kwargs):
         print(proc.stderr)
         assert 0
     return proc
+
+KEY_URL = os.environ.get("KEY_URL") or "https://key.hub.atxlediot.com/"
+RELEASE_REPO_URL = (
+    os.environ.get("RELEASE_REPO_URL")
+    or "https://github.com/CleanLife-IT/Releases---atxlediot"
+)
