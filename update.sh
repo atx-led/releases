@@ -85,7 +85,7 @@ rm -rf $INSTALL_DIR.new
 mkdir $INSTALL_DIR.new
 unzip new-releases.tmp/bundle.zip -d $INSTALL_DIR.new
 
-for path in ops/install.py cron-boom/cron_boom.py sddp/sddp_wrapper.py zpds/run.sh; do
+for path in ops/install.py ops/cron-boom-health.service ops/cron-boom-health.timer ops/cron-boom-restart.service cron-boom/cron_boom.py sddp/sddp_wrapper.py zpds/run.sh; do
     if [ ! -s $INSTALL_DIR.new/$path ]; then
         echo "New install is missing required file: $path"
         rm -rf $INSTALL_DIR.new new-releases.tmp
